@@ -79,11 +79,6 @@ const questions = [
       options: ["Cheetah", "Lion", "Leopard"],
       answer: "Cheetah"
     },
-    {
-      question: "What is the name of the largest bird in the world?",
-      options: ["Ostrich", "Eagle", "Penguin"],
-      answer: "Ostrich"
-    }
   ];
   
   let currentQuestion = 0;
@@ -123,12 +118,6 @@ const questions = [
       if (selectedOption.value === questions[currentQuestion].answer) {
         score++;
       }
-      currentQuestion++;
-      if (currentQuestion < questions.length) {
-        displayQuestion(currentQuestion);
-      } else {
-        endQuiz();
-      }
     }
   }
   
@@ -148,14 +137,20 @@ const questions = [
   }
   
   function endQuiz() {
-    quizContainer.innerHTML = `
-      <h2>Quiz completed!</h2>
-      <p>You answered ${score} out of ${questions.length} questions correctly.</p>
-    `;
-    prevButton.style.display = "none";
-    nextButton.style.display = "none";
-    submitButton.style.display = "none";
-    timer.style.display = "none";
+    // Display the confirmation alert
+    const confirmed = confirm("Are you sure you want to submit the quiz?");
+  
+    // If the user confirms, display the final score
+    if (confirmed) {
+      quizContainer.innerHTML = `
+        <h2>Quiz completed!</h2>
+        <p>You answered ${score} out of ${questions.length} questions correctly.</p>
+      `;
+      prevButton.style.display = "none";
+      nextButton.style.display = "none";
+      submitButton.style.display = "none";
+      timer.style.display = "none";
+    }
   }
   
   prevButton.addEventListener("click", () => {
